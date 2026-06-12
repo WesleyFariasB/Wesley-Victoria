@@ -367,7 +367,11 @@
     audioToggle?.addEventListener("click", toggleAudio);
 
     letterModal?.addEventListener("click", (event) => {
-      if (event.target instanceof HTMLElement && event.target.hasAttribute("data-close-letter")) {
+      const closeTarget = event.target instanceof Element
+        ? event.target.closest("[data-close-letter]")
+        : null;
+
+      if (closeTarget) {
         closeLetter();
       }
     });
