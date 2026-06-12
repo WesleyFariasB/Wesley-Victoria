@@ -21,6 +21,8 @@
 }
 
 html {
+  max-width: 100%;
+  overflow-x: hidden;
   background: var(--black);
   color: var(--ink);
   scroll-behavior: smooth;
@@ -29,6 +31,7 @@ html {
 }
 
 body {
+  max-width: 100%;
   min-width: 320px;
   margin: 0;
   overflow-x: hidden;
@@ -196,28 +199,49 @@ body:not(.is-loading) .loader {
   z-index: 45;
   right: 24px;
   bottom: 24px;
-  display: grid;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   width: 46px;
   height: 46px;
-  place-items: center;
-  border: 1px solid rgba(255, 253, 252, 0.22);
+  border: 1px solid rgba(255, 253, 252, 0.26);
   border-radius: 999px;
-  background: rgba(23, 18, 20, 0.48);
+  background: rgba(23, 18, 20, 0.52);
   color: var(--warm-white);
   cursor: pointer;
+  padding: 0;
   box-shadow: 0 16px 38px rgba(0, 0, 0, 0.18);
   backdrop-filter: blur(16px);
   transition: transform 180ms ease, background 180ms ease, box-shadow 180ms ease;
 }
 
 .audio-toggle svg {
-  width: 20px;
-  height: 20px;
+  width: 21px;
+  height: 21px;
   fill: none;
+  flex: 0 0 auto;
   stroke: currentColor;
   stroke-linecap: round;
   stroke-linejoin: round;
-  stroke-width: 1.8;
+  stroke-width: 1.9;
+}
+
+.audio-toggle.is-playing {
+  background: rgba(74, 15, 36, 0.62);
+  box-shadow: 0 16px 42px rgba(74, 15, 36, 0.24);
+}
+
+.youtube-audio-player,
+.youtube-audio-player iframe,
+#youtubeAudioPlayer {
+  position: fixed;
+  top: -9999px;
+  left: -9999px;
+  width: 200px;
+  height: 200px;
+  border: 0;
+  opacity: 0;
+  pointer-events: none;
 }
 
 .audio-toggle:hover,
@@ -966,8 +990,8 @@ body:not(.is-loading) .loader {
   }
 
   .audio-toggle svg {
-    width: 18px;
-    height: 18px;
+    width: 19px;
+    height: 19px;
   }
 
   .chapter,
@@ -1017,7 +1041,12 @@ body:not(.is-loading) .loader {
     width: min(100%, 560px);
     margin: 0 auto;
     color: var(--section-title);
-    font-size: clamp(3.4rem, 18vw, 5rem);
+    max-width: 100%;
+    overflow-wrap: normal;
+    word-break: normal;
+    hyphens: none;
+    text-wrap: balance;
+    font-size: clamp(3.1rem, 10vw, 5rem);
     line-height: 0.92;
     text-align: left;
   }
@@ -1116,7 +1145,11 @@ body:not(.is-loading) .loader {
   .chapter__text,
   .chapter blockquote,
   .chapter .chapter__kicker {
-    width: min(100%, 350px);
+    width: min(100%, 390px);
+  }
+
+  .chapter h2 {
+    font-size: clamp(2.65rem, 11.4vw, 3.9rem);
   }
 
   .finale {
@@ -1150,7 +1183,7 @@ body:not(.is-loading) .loader {
   }
 
   .chapter h2 {
-    font-size: clamp(3rem, 17vw, 4.2rem);
+    font-size: clamp(2.45rem, 11vw, 3.5rem);
   }
 
   .chapter blockquote {

@@ -42,13 +42,15 @@
     <div class="transition-veil" id="transitionVeil" aria-hidden="true"></div>
     <div class="ambient-glow" aria-hidden="true"></div>
 
-    <button class="audio-toggle" id="audioToggle" type="button" hidden aria-label="Ativar música">
+    <button class="audio-toggle" id="audioToggle" type="button" aria-label="Ativar música" aria-pressed="false">
       <svg viewBox="0 0 24 24" aria-hidden="true">
         <path d="M11 5 6 9H3v6h3l5 4V5Z"></path>
-        <path d="M15.5 8.5a5 5 0 0 1 0 7"></path>
-        <path d="M18.5 5.5a9 9 0 0 1 0 13"></path>
+        <path d="M16 9.5 21 14.5"></path>
+        <path d="m21 9.5-5 5"></path>
       </svg>
     </button>
+
+    <div class="youtube-audio-player" id="youtubeAudioPlayer" aria-hidden="true"></div>
 
     <main id="conteudo">
       <section class="hero" id="inicio" aria-label="Abertura da declaração">

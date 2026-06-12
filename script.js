@@ -12,11 +12,32 @@
   const openLetterButton = document.getElementById("openLetter");
   const audioToggle = document.getElementById("audioToggle");
   const skipLink = document.querySelector(".skip-link");
-  // Filled only when an audio file is present in the local project scan.
-  const audioFiles = [];
+  const youtubeContainerId = "youtubeAudioPlayer";
+  const youtubeVideoId = "nGGxZe3I2DE";
 
-  let audioElement = null;
+  const audioIcons = {
+    off: `
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M11 5 6 9H3v6h3l5 4V5Z"></path>
+        <path d="M16 9.5 21 14.5"></path>
+        <path d="m21 9.5-5 5"></path>
+      </svg>
+    `,
+    on: `
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M11 5 6 9H3v6h3l5 4V5Z"></path>
+        <path d="M15.5 8.5a5 5 0 0 1 0 7"></path>
+        <path d="M18.5 5.5a9 9 0 0 1 0 13"></path>
+      </svg>
+    `,
+  };
+
   let lastFocusedElement = null;
+  let youtubePlayer = null;
+  let youtubeReady = false;
+  let youtubeApiLoading = false;
+  let audioShouldPlay = false;
+  let audioIsPlaying = false;
 
   const removeLoader = () => body.classList.remove("is-loading");
   window.addEventListener("load", () => window.setTimeout(removeLoader, prefersReducedMotion ? 0 : 650));
@@ -60,7 +81,6 @@
         body.classList.remove("not-started");
         body.classList.add("experience-started");
         scrollToElement(target);
-        playAudio();
       },
       prefersReducedMotion ? 0 : 360,
     );
@@ -71,47 +91,158 @@
     );
   }
 
-  function initializeAudio() {
-    if (!audioFiles.length || !audioToggle) return;
+  function setAudioButtonState(isPlaying, label) {
+    if (!audioToggle) return;
 
-    audioElement = new Audio(audioFiles[0]);
-    audioElement.loop = true;
-    audioElement.preload = "metadata";
-    audioElement.addEventListener("canplaythrough", () => {
-      audioToggle.hidden = false;
-    }, { once: true });
-    audioElement.addEventListener("error", () => {
-      audioToggle.hidden = true;
-      audioElement = null;
-    }, { once: true });
-    audioElement.load();
+    audioIsPlaying = isPlaying;
+    audioToggle.innerHTML = isPlaying ? audioIcons.on : audioIcons.off;
+    audioToggle.classList.toggle("is-playing", isPlaying);
+    audioToggle.setAttribute("aria-pressed", String(isPlaying));
+    audioToggle.setAttribute("aria-label", label || (isPlaying ? "Pausar música" : "Ativar música"));
+    audioToggle.title = label || (isPlaying ? "Pausar música" : "Ativar música");
   }
 
-  function playAudio() {
-    if (!audioElement) return;
+  function loadYouTubeApi() {
+    if (!audioToggle) return;
 
-    audioElement.play()
-      .then(() => {
-        audioToggle.setAttribute("aria-label", "Desativar música");
-        audioToggle.classList.add("is-playing");
-      })
-      .catch(() => {
-        audioToggle.hidden = false;
-        audioToggle.setAttribute("aria-label", "Ativar música");
-      });
-  }
-
-  function toggleAudio() {
-    if (!audioElement) return;
-
-    if (audioElement.paused) {
-      playAudio();
+    if (window.YT?.Player) {
+      createYouTubePlayer();
       return;
     }
 
-    audioElement.pause();
-    audioToggle.setAttribute("aria-label", "Ativar música");
-    audioToggle.classList.remove("is-playing");
+    if (youtubeApiLoading) return;
+    youtubeApiLoading = true;
+
+    const previousReady = window.onYouTubeIframeAPIReady;
+    window.onYouTubeIframeAPIReady = () => {
+      if (typeof previousReady === "function") previousReady();
+      createYouTubePlayer();
+    };
+
+    const existingScript = document.querySelector("script[src='https://www.youtube.com/iframe_api']");
+    if (existingScript) return;
+
+    const script = document.createElement("script");
+    script.src = "https://www.youtube.com/iframe_api";
+    script.async = true;
+    script.onerror = () => {
+      youtubeApiLoading = false;
+      setAudioButtonState(false, "Música indisponível");
+    };
+    document.head.appendChild(script);
+  }
+
+  function createYouTubePlayer() {
+    const container = document.getElementById(youtubeContainerId);
+    if (youtubePlayer || !container || !window.YT?.Player) return;
+
+    youtubePlayer = new window.YT.Player(youtubeContainerId, {
+      width: 200,
+      height: 200,
+      videoId: youtubeVideoId,
+      playerVars: {
+        autoplay: 0,
+        controls: 0,
+        disablekb: 1,
+        fs: 0,
+        iv_load_policy: 3,
+        loop: 1,
+        modestbranding: 1,
+        playsinline: 1,
+        playlist: youtubeVideoId,
+        rel: 0,
+      },
+      events: {
+        onReady: handleYouTubeReady,
+        onStateChange: handleYouTubeStateChange,
+        onError: handleYouTubeError,
+      },
+    });
+  }
+
+  function handleYouTubeReady(event) {
+    youtubeReady = true;
+    youtubeApiLoading = false;
+
+    if (typeof event.target.setLoop === "function") {
+      event.target.setLoop(true);
+    }
+
+    if (audioShouldPlay) {
+      playAudio();
+    } else {
+      setAudioButtonState(false);
+    }
+  }
+
+  function handleYouTubeStateChange(event) {
+    const PlayerState = window.YT?.PlayerState;
+    if (!PlayerState) return;
+
+    if (event.data === PlayerState.PLAYING) {
+      audioShouldPlay = true;
+      setAudioButtonState(true);
+      return;
+    }
+
+    if (event.data === PlayerState.PAUSED) {
+      setAudioButtonState(false);
+      return;
+    }
+
+    if (event.data === PlayerState.ENDED) {
+      if (audioShouldPlay && event.target?.playVideo) {
+        event.target.seekTo?.(0);
+        event.target.playVideo();
+      } else {
+        setAudioButtonState(false);
+      }
+    }
+  }
+
+  function handleYouTubeError() {
+    audioShouldPlay = false;
+    setAudioButtonState(false, "Música indisponível");
+  }
+
+  function playAudio() {
+    audioShouldPlay = true;
+
+    if (!youtubePlayer || !youtubeReady) {
+      setAudioButtonState(false, "Carregando música");
+      loadYouTubeApi();
+      return;
+    }
+
+    try {
+      youtubePlayer.unMute?.();
+      youtubePlayer.setLoop?.(true);
+      youtubePlayer.playVideo?.();
+    } catch {
+      audioShouldPlay = false;
+      setAudioButtonState(false, "Música indisponível");
+    }
+  }
+
+  function pauseAudio() {
+    audioShouldPlay = false;
+
+    try {
+      youtubePlayer?.pauseVideo?.();
+    } catch {
+      // Keep the button usable even if the embedded player is temporarily unavailable.
+    }
+
+    setAudioButtonState(false);
+  }
+
+  function toggleAudio() {
+    if (audioIsPlaying) {
+      pauseAudio();
+      return;
+    }
+
+    playAudio();
   }
 
   function bindImageFallbacks() {
@@ -243,7 +374,8 @@
   }
 
   createParticles();
-  initializeAudio();
+  setAudioButtonState(false);
+  loadYouTubeApi();
   bindImageFallbacks();
   initializeObservers();
   bindInteractions();
