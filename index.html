@@ -1,0 +1,300 @@
+<!doctype html>
+<html lang="pt-BR" class="no-js">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#4A0F24" />
+    <meta
+      name="description"
+      content="Uma declaração de amor digital sobre carinho, cumplicidade, respeito e uma vida construída a dois."
+    />
+    <meta property="og:title" content="Nossa História" />
+    <meta
+      property="og:description"
+      content="Um pequeno universo criado para lembrar tudo aquilo que construímos juntos."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="imagens/0b4a767f-a6a5-495f-8adf-b6dc3a6550f8.jfif" />
+    <title>Nossa História</title>
+
+    <script>
+      document.documentElement.classList.remove("no-js");
+    </script>
+
+    <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+    <link rel="preload" as="image" href="imagens/0b4a767f-a6a5-495f-8adf-b6dc3a6550f8.jfif" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body class="is-loading not-started">
+    <a class="skip-link" href="#amor">Pular para a história</a>
+
+    <div class="loader" aria-hidden="true">
+      <div class="loader__heart"></div>
+    </div>
+
+    <div class="transition-veil" id="transitionVeil" aria-hidden="true"></div>
+    <div class="ambient-glow" aria-hidden="true"></div>
+
+    <button class="audio-toggle" id="audioToggle" type="button" hidden aria-label="Ativar música">
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M11 5 6 9H3v6h3l5 4V5Z"></path>
+        <path d="M15.5 8.5a5 5 0 0 1 0 7"></path>
+        <path d="M18.5 5.5a9 9 0 0 1 0 13"></path>
+      </svg>
+    </button>
+
+    <main id="conteudo">
+      <section class="hero" id="inicio" aria-label="Abertura da declaração">
+        <div class="particle-field" id="particleField" aria-hidden="true"></div>
+        <div class="hero__halo" aria-hidden="true"></div>
+        <div class="hero__content">
+          <div class="heart-mark" aria-hidden="true">
+            <svg viewBox="0 0 64 64">
+              <path
+                d="M32 53S9 39.8 9 22.8C9 14.8 14.3 10 21.2 10c4.8 0 8.5 2.7 10.8 6.4C34.3 12.7 38 10 42.8 10 49.7 10 55 14.8 55 22.8 55 39.8 32 53 32 53Z"
+              ></path>
+            </svg>
+          </div>
+          <p class="hero__eyebrow">Feito com amor, especialmente para você.</p>
+          <h1>Para o amor da minha vida</h1>
+          <p class="hero__subtitle">
+            Criei este pequeno universo para lembrar tudo aquilo que construímos juntos.
+          </p>
+          <a class="primary-button" id="startExperience" href="#amor">
+            <span>Começar nossa história</span>
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M5 12h14"></path>
+              <path d="m13 6 6 6-6 6"></path>
+            </svg>
+          </a>
+        </div>
+      </section>
+
+      <div class="story-shell" id="historia">
+        <section class="chapter chapter--amor" id="amor" data-step="1" data-title="Amor">
+          <div class="chapter__visual">
+            <figure class="photo-card" style="--pos: center 28%">
+              <img
+                src="imagens/0b4a767f-a6a5-495f-8adf-b6dc3a6550f8.jfif"
+                alt="O casal abraçado diante de uma parede verde, em um momento elegante e carinhoso."
+                width="1200"
+                height="1600"
+                decoding="async"
+                fetchpriority="high"
+              />
+              <figcaption>Quando o coração reconhece casa.</figcaption>
+            </figure>
+          </div>
+          <div class="chapter__copy">
+            <p class="chapter__kicker">01 / Amor</p>
+            <h2>Amor</h2>
+            <p class="chapter__text">
+              Amor é escolher a mesma pessoa todos os dias. É olhar para você e perceber que,
+              mesmo entre tantas possibilidades, meu coração sempre encontra o caminho de volta
+              para o seu.
+            </p>
+            <blockquote>Você é o meu lugar favorito no mundo.</blockquote>
+          </div>
+        </section>
+
+        <section class="chapter chapter--paz" id="paz" data-step="2" data-title="Paz">
+          <div class="chapter__visual">
+            <figure class="photo-card" style="--pos: center 42%">
+              <img
+                src="imagens/4dc0fb80-f0d2-4c09-b2bc-566808ef1a7a.jfif"
+                alt="O casal se olhando com carinho ao pôr do sol, com flores nas mãos."
+                width="1200"
+                height="1600"
+                loading="lazy"
+                decoding="async"
+              />
+              <figcaption>A calma bonita de estar perto.</figcaption>
+            </figure>
+          </div>
+          <div class="chapter__copy">
+            <p class="chapter__kicker">02 / Paz</p>
+            <h2>Paz</h2>
+            <p class="chapter__text">
+              Em você encontrei a tranquilidade que não sabia que precisava. Seu abraço transforma
+              dias difíceis em silêncio, cuidado e segurança.
+            </p>
+            <blockquote>Meu coração descansa quando está perto do seu.</blockquote>
+          </div>
+        </section>
+
+        <section
+          class="chapter chapter--companheirismo"
+          id="companheirismo"
+          data-step="3"
+          data-title="Companheirismo"
+        >
+          <div class="chapter__visual">
+            <figure class="photo-card" style="--pos: center 48%">
+              <img
+                src="imagens/7d646568-bcdd-4091-8e48-e9964e132ca4.jfif"
+                alt="O casal se beijando em uma noite iluminada, celebrando um momento juntos."
+                width="960"
+                height="1280"
+                loading="lazy"
+                decoding="async"
+              />
+              <figcaption>Dois caminhos na mesma direção.</figcaption>
+            </figure>
+          </div>
+          <div class="chapter__copy">
+            <p class="chapter__kicker">03 / Companheirismo</p>
+            <h2>Companheirismo</h2>
+            <p class="chapter__text">
+              Estar ao seu lado é saber que não preciso enfrentar a vida sozinho. Somos dois sonhos,
+              duas histórias e dois caminhos que escolheram caminhar na mesma direção.
+            </p>
+            <blockquote>Não importa o destino, desde que seja com você.</blockquote>
+            <div class="path-lines" aria-hidden="true">
+              <span></span>
+              <span></span>
+            </div>
+          </div>
+        </section>
+
+        <section class="chapter chapter--fidelidade" id="fidelidade" data-step="4" data-title="Fidelidade">
+          <div class="chapter__visual">
+            <figure class="photo-card photo-card--tall" style="--pos: center 34%">
+              <img
+                src="imagens/a4ac72e6-97f5-480a-a7f3-b5da4a1358fa.jfif"
+                alt="O casal sorrindo em um encontro descontraído, brindando juntos."
+                width="900"
+                height="1600"
+                loading="lazy"
+                decoding="async"
+              />
+              <figcaption>O compromisso também mora nos detalhes.</figcaption>
+            </figure>
+          </div>
+          <div class="chapter__copy">
+            <p class="chapter__kicker">04 / Fidelidade</p>
+            <h2>Fidelidade</h2>
+            <p class="chapter__text">
+              Fidelidade é mais do que permanecer. É cuidar, proteger, respeitar e escolher nossa
+              história até mesmo quando ninguém está olhando.
+            </p>
+            <blockquote>
+              Meu compromisso é com você, com nós dois e com tudo o que ainda vamos viver.
+            </blockquote>
+          </div>
+        </section>
+
+        <section class="chapter chapter--compreensao" id="compreensao" data-step="5" data-title="Compreensão">
+          <div class="chapter__visual">
+            <figure class="photo-card" style="--pos: center 36%">
+              <img
+                src="imagens/bf440023-448d-43f7-9492-948ab686acf7.jfif"
+                alt="O casal em uma selfie ao ar livre, próximos e sorrindo em um dia ensolarado."
+                width="960"
+                height="1280"
+                loading="lazy"
+                decoding="async"
+              />
+              <figcaption>A delicadeza de se entender sem pressa.</figcaption>
+            </figure>
+          </div>
+          <div class="chapter__copy">
+            <p class="chapter__kicker">05 / Compreensão</p>
+            <h2>Compreensão</h2>
+            <p class="chapter__text">
+              Amar também é aprender a ouvir, acolher e compreender. É saber que somos diferentes,
+              mas que sempre podemos encontrar um lugar onde nossos sentimentos se encontram.
+            </p>
+            <blockquote>
+              Quero continuar aprendendo a amar você da maneira que você merece.
+            </blockquote>
+          </div>
+        </section>
+
+        <section class="chapter chapter--respeito" id="respeito" data-step="6" data-title="Respeito">
+          <div class="chapter__visual">
+            <figure class="photo-card" style="--pos: center 34%">
+              <img
+                src="imagens/c8b3410b-1e29-4689-b87c-7d198188f7e3.jfif"
+                alt="O casal em uma foto íntima, lado a lado, com expressão serena."
+                width="960"
+                height="1280"
+                loading="lazy"
+                decoding="async"
+              />
+              <figcaption>A base que protege tudo.</figcaption>
+            </figure>
+          </div>
+          <div class="chapter__copy">
+            <p class="chapter__kicker">06 / Acima de tudo</p>
+            <h2>Acima de tudo, respeito</h2>
+            <p class="chapter__text">
+              O respeito é a base de tudo o que construímos. É ele que protege o nosso amor,
+              fortalece nossa confiança e permite que sejamos verdadeiros um com o outro.
+            </p>
+            <blockquote>Que nunca nos faltem amor, diálogo, cuidado e respeito.</blockquote>
+          </div>
+        </section>
+
+        <section class="finale" id="final" aria-label="Encerramento">
+          <div class="finale__lines" aria-hidden="true">
+            <span></span>
+            <span></span>
+          </div>
+          <div class="finale__content">
+            <p class="chapter__kicker">Para sempre que a gente escolher</p>
+            <h2>Eu escolheria você outra vez</h2>
+            <p>
+              Em qualquer vida, em qualquer tempo e em qualquer lugar, meu coração encontraria o seu.
+            </p>
+            <p>
+              Obrigado por cada sorriso, cada abraço, cada conversa, cada aprendizado e cada momento
+              ao meu lado. Nossa história é uma das coisas mais bonitas que a vida me deu.
+            </p>
+            <strong>Feliz Dia dos Namorados, meu amor.</strong>
+            <div class="finale__actions">
+              <button class="secondary-button" id="openLetter" type="button">
+                Tenho mais uma coisa para dizer
+              </button>
+              <button class="primary-button primary-button--light" id="replayStory" type="button">
+                <span>Rever nossa história</span>
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M3 12a9 9 0 1 0 3-6.7"></path>
+                  <path d="M3 4v6h6"></path>
+                </svg>
+              </button>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <div class="letter-modal" id="letterModal" role="dialog" aria-modal="true" aria-labelledby="letterTitle" hidden>
+      <div class="letter-modal__backdrop" data-close-letter></div>
+      <article class="letter" tabindex="-1">
+        <button class="letter__close" type="button" data-close-letter aria-label="Fechar carta">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M18 6 6 18"></path>
+            <path d="m6 6 12 12"></path>
+          </svg>
+        </button>
+        <p class="chapter__kicker">Uma carta só sua</p>
+        <h2 id="letterTitle">Tenho mais uma coisa para dizer</h2>
+        <p>
+          Talvez eu não consiga colocar em palavras tudo o que sinto por você, mas quero que saiba
+          que sou imensamente grato por ter você ao meu lado. Você faz parte dos meus melhores
+          pensamentos, dos meus maiores sonhos e dos planos mais bonitos que tenho para o futuro.
+          Eu te amo.
+        </p>
+      </article>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>

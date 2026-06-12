@@ -1,0 +1,19 @@
+# Arquivos locais do sistema/editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Dependências e caches acidentais
+node_modules/
+.npm/
+.cache/
+dist/
+build/
+
+# Capturas e arquivos temporários de validação
+preview-*.png
+*.log
+
+# Pasta original local duplicada; o site usa a pasta imagens/
+img/
